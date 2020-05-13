@@ -1,0 +1,100 @@
+{% load static %}
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Blog</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<style>
+
+
+body
+{
+    background-color: mintcream;
+}
+
+  .recepie_area
+    {
+        margin-left: 10px;
+
+    }
+
+    @media (min-width: 600px) and (max-width: 980px){
+
+    }
+    .text h3
+    {
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;
+        margin-left: 10px;
+        float: left;
+    }
+    .container button
+    {
+        float: right;
+
+    }
+    .container
+    {
+        background-color: whitesmoke;
+    }
+</style>
+
+
+<div class="container">
+    <div class="text">
+        <h3><button type="button" class="btn btn-info">Ebooks</button></h3>
+        <button type="button" class="btn btn-danger">Danger</button>
+    </div>
+
+</div>
+<body>
+<br>
+<br>
+<div class="recepie_area">
+            <div class="row">
+                 {% for arti in object_list %}
+                     <div class="column">
+                         <div class="single_recepie text-center">
+                             <div class="recepie_thumb">
+                                 <img src="{{arti.cover_page.url}}"
+                                      style="width:  300px;
+                                            height: 300px;
+                                            background-size: cover;"  alt="">
+                             </div>
+                             <h3>Title :{{ arti.Title}}</h3>
+                             <span>Author :{{ arti.Author }}</span>
+                             <p>Time Needs: 30 Mins</p>
+                             <a href="{{arti.Add_Book.url}}" class="line_btn">Download</a>
+                         </div>
+                     </div>
+                 {% endfor %}
+            </div>
+            </div>
+ <div class="col-md-8">
+      <!-- Pagination -->
+      {% if is_paginated %}
+        <ul class="pagination justify-content-center mb-4">
+             {% if page_obj.has_previous %}
+          <li class="page-item">
+
+            <a class="page-link" href="?page{{ page_obj.previous_page_number }}">&larr; Older</a>
+          </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+          <li class="page-item ">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next Page &rarr;</a>
+              {% endif %}
+          </li>
+        </ul>
+      {% endif %}
+      </div>
+
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Ebook Store</title>
+<!--
+
+Template 2101 Insertion
+
+http://www.tooplate.com/view/2101-insertion
+
+-->
+  <!-- load CSS -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400">        <!-- Google web font "Open Sans" -->
+  <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">                                            <!-- https://getbootstrap.com/ -->
+  <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">                                      <!-- Font awesome -->
+  <link rel="stylesheet" href="{% static 'css/tooplate-style.css' %}">                                           <!-- Templatemo style -->
+
+  <script>
+    var renderPage = true;
+
+    if (navigator.userAgent.indexOf('MSIE') !== -1
+      || navigator.appVersion.indexOf('Trident/') > 0) {
+      /* Microsoft Internet Explorer detected in. */
+      alert("Please view this in a modern browser such as Chrome or Microsoft Edge.");
+      renderPage = false;
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <!-- Loader -->
+  <div id="loader-wrapper">
+    <div id="loader"></div>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+  </div>
+
+  <div class="tm-main">
+
+    <div class="tm-welcome-section">
+      <div class="container tm-navbar-container">
+        <div class="row">
+          <div class="col-xl-12">
+            <nav class="navbar navbar-expand-sm">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a href="index.html" class="nav-link tm-nav-link tm-text-white active">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'add' %}" class="nav-link tm-nav-link tm-text-white">Add Book</a>
+                </li>
+                <li class="nav-item">
+                  <a href="contact.html" class="nav-link tm-nav-link tm-text-white">Contact</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="container text-center tm-welcome-container">
+        <div class="tm-welcome">
+
+            <i class="fa fa-book" aria-hidden="true"></i>
+
+            <h1 class="text-uppercase mb-3 tm-site-name">Eb <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span><i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+<span class="sr-only">Loading...</span>k</h1>
+          <p class="tm-site-description">Share book share Knowledge</p>
+           <p class="tm-site-description">Read book gain Knowledge</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container">
+      <div class="tm-search-form-container">
+        <form action="index.html" method="GET" class="form-inline tm-search-form">
+          <div class="text-uppercase tm-new-release">New Release</div>
+          <div class="form-group tm-search-box">
+            <input type="text" name="keyword" class="form-control tm-search-input" placeholder="Type your keyword ...">
+            <input type="submit" value="Search" class="form-control tm-search-submit">
+          </div>
+          <div class="form-group tm-advanced-box">
+            <a href="#" class="tm-text-white">Go Advanced ...</a>
+          </div>
+        </form>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="tm-tag-line">
+          <h2 class="tm-tag-line-title">Book is your powerful energy.</h2>
+          </div>
+        </div>
+      </div>
+{% for arti in object_list %}
+      <div class="row mb-5">
+        <div class="col-xl-12">
+          <div class="media-boxes">
+            <div class="media">
+              <img src="{{ arti.cover_page.url }}" alt="cover" style="width:  100px;
+    height: 100px;
+    background-size: cover;" class="mr-3">
+              <div class="media-body tm-bg-gray">
+                <div class="tm-description-box">
+                  <h5 class="tm-text-blue">{{ arti.Title }}</h5>
+                  <p class="mb-0">Author:{{ arti.Author }}  </p>
+
+                    <p>  uploaded by  <span class="tm-text-blue tm-price-tag">{{ arti.user }}</span></p>
+                </div>
+                <div class="tm-buy-box">
+                  <a href="{{ arti.Add_Book.url }}" class="tm-bg-blue tm-text-white tm-buy">Download</a>
+
+                </div>
+              </div>
+            </div>
+              {% endfor %}
+
+
+
+
+
+      <footer class="row">
+        <div class="col-xl-12">
+          <p class="text-center p-4">Copyright &copy; <span class="tm-current-year">2020</span> Lokeshwar
+          
+          - Design:  Tooplate</p>
+        </div>
+      </footer>
+    </div> <!-- .container -->
+
+  </div> <!-- .main -->
+
+  <!-- load JS -->
+  <script src="{% static 'js/jquery-3.2.1.slim.min.js' %}"></script> <!-- https://jquery.com/ -->
+  <script>
+
+    /* DOM is ready
+    ------------------------------------------------*/
+    $(function () {
+
+      if (renderPage) {
+        $('body').addClass('loaded');
+      }
+
+      $('.tm-current-year').text(new Date().getFullYear());  // Update year in copyright
+    });
+
+  </script>
+      <div class="col-md-8">
+      <!-- Pagination -->
+      {% if is_paginated %}
+        <ul class="pagination justify-content-center mb-4">
+             {% if page_obj.has_previous %}
+          <li class="page-item">
+
+            <a class="page-link" href="?page{{ page_obj.previous_page_number }}">&larr; Older</a>
+          </li>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+          <li class="page-item ">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next Page &rarr;</a>
+              {% endif %}
+          </li>
+        </ul>
+      {% endif %}
+      </div>
+</div>
+
+</body>
+</html>
